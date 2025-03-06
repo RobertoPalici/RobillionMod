@@ -1,0 +1,10 @@
+{
+	"id": "RobillionMod",
+	"name": "RobillionMod",
+	"display_name": "",
+	"author": ["Robillion"],
+	"description": "New Jokers i Hop",
+	"prefix": "RobMod",
+	"main_file": "main.lua",
+	"version": "1.3.1"
+}
