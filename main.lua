@@ -198,7 +198,7 @@ SMODS.Joker{
                 new_blueprint:add_to_deck()
                 G.jokers:emplace(new_blueprint)
             return{
-                message = localize('k_plus_blueprint'),
+                message = '+ Blueprint',
                 colour = G.C.BLUE
             }
             end
