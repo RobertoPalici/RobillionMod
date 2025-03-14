@@ -225,5 +225,34 @@ G.P_CENTERS['rob_massive_joker'] = {
     atlas = 'Jokers'
 }
 
+print("Registering Flush Rock Poker Hand")
+SMODS.PokerHand{
+    key = 'Flush Rock',
+    mult = 200,
+    chips = 10,
+    l_mult = 20,
+    l_chips = 10,
+    visible = true,
+    example = {
+        { 'S_K', false }, -- King of Spades, does not score
+        { 'S_9', true }, -- 9 of Spades, scores
+        { 'D_9', true }, -- 9 of Diamonds, scores
+        { 'H_6', false }, -- 6 of Hearts, does not score
+        { 'D_3', false } -- 3 of Diamonds, does not score
+    },
+    loc_txt = {
+
+            name = 'Flush Rock',
+            description = {
+                '5 cards with the Stone enhancement'
+            }
+    },  
+    evaluate = function(parts, hand)
+        print("Evaluating Flush Rock")
+        -- Add evaluation logic here
+    end,
+}
+
+
 -- Debug: Verify that the Massive Joker is registered
 print("Massive Joker registered:", G.P_CENTERS['rob_massive_joker'] and G.P_CENTERS['rob_massive_joker'].name or "Not found")
