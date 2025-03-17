@@ -4,7 +4,7 @@
 	"display_name": "",
 	"author": ["Robillion"],
 	"description": "New Jokers i Hop",
-	"prefix": "RobMod",
+	"prefix": "rob",
 	"main_file": "main.lua",
 	"version": "1.3.1"
 }
