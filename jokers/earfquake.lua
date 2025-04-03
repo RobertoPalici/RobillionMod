@@ -4,14 +4,12 @@ SMODS.Joker{
         name = "Earfquake",
         text = {
             "Retrigger each played {C:attention}Stone{} card",
-            "depending on the number of",
-            "{C:attention}Stone{} cards played:",
-            "{C:attention}3 - 4{} cards: {C:attention}1{} retrigger",
-            "{C:attention}5{} cards: {C:attention}2{} retriggers"
+            "{C:attention}2{} additional times if played hand",
+            "contains {C:attention}5 Stone cards{}",
         }
     },
     rarity = 2,
-    cost = 5,
+    cost = 7,
     blueprint_compat = true,
     atlas= 'Jokers',
     pos = {x = 4, y = 0},
@@ -30,9 +28,7 @@ SMODS.Joker{
                     stone_count = stone_count + 1
                 end
             end
-            if stone_count >=3 and stone_count < 5 then
-                card.ability.extra = 1
-            elseif stone_count == 5 then
+            if stone_count == 5 then
                 card.ability.extra = 2
             end
             if context.other_card.ability.name == "Stone Card" then

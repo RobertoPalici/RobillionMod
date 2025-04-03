@@ -12,12 +12,13 @@ local files = {
     jokers = {
         list = {
             "seven_ate_nine",
-            "blackjack",
+            "jack_black",
             "massive_joker",
             "architect",
             "earfquake",
             "rolling_stones",
             "medusa",
+            "jimnaldo"
         },
         directory = 'jokers/'
     },
@@ -26,6 +27,19 @@ local files = {
             "stone_flush"
         },
         directory = 'poker_hands/'
+    },
+    planets = {
+        list = {
+            "meteor",
+        },
+        directory = 'consumables/planets/'
+    },
+    vouchers = {
+        list = {
+            
+            "seal_the_deal",
+        },
+        directory = 'vouchers/'
     },
 }
 
@@ -40,6 +54,19 @@ SMODS.Atlas{
     py = 95
 }
 
+SMODS.Atlas{
+    key = 'Consumables',
+    path = 'Consumables.png',
+    px = 71,
+    py = 95
+}
+
+SMODS.Atlas{
+    key = 'Vouchers',
+    path = 'Vouchers.png',
+    px = 71,
+    py = 95
+}
 ----------------------------------------------------------------
 ----------------------------------------------------------------
 

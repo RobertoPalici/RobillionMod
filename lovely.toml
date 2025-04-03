@@ -39,3 +39,15 @@ G.GAME.hands['rob_stone_flush'].l_chips = G.GAME.hands['rob_stone_flush'].l_chip
 '''
 match_indent = true
 times = 1
+
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = 'card:set_seal(SMODS.poll_seal({mod = 10}))'
+position = "at"
+payload = '''
+card:set_seal(SMODS.poll_seal({mod = 100}))
+'''
+
+match_indent = true
+times = 1
