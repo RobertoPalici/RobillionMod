@@ -42,12 +42,15 @@ times = 1
 
 [[patches]]
 [patches.pattern]
-target = 'card.lua'
-pattern = 'card:set_seal(SMODS.poll_seal({mod = 10}))'
-position = "at"
-payload = '''
-card:set_seal(SMODS.poll_seal({mod = 100}))
+target = "functions/state_events.lua"
+pattern = '''
+for i=1, hand_space do --draw cards from deck
 '''
-
+position = "before"
+payload = '''
+hand_space = hand_space + G.GAME.green_seal_draws
+G.GAME.green_seal_draws = 0
+'''
 match_indent = true
 times = 1
+

@@ -18,7 +18,14 @@ local files = {
             "earfquake",
             "rolling_stones",
             "medusa",
-            "jimnaldo"
+            "jimnaldo",
+            "mahoraga",
+            "lapse_blue",
+            "reversal_red",
+            "hollow_purple",
+            "gojo",
+            "six_eyes",
+            "unlimited_void",
         },
         directory = 'jokers/'
     },
@@ -38,8 +45,36 @@ local files = {
         list = {
             
             "seal_the_deal",
+            "sealionaire",
         },
         directory = 'vouchers/'
+    },
+    seals = {
+        list = {
+            "green_seal",
+            "orange_seal",
+            "black_seal",
+        },
+        directory = 'seals/'
+    },
+    blinds = {
+        list = {
+            "candle",
+        },
+        directory = 'blinds/'
+    },
+    rarities = {
+        list = {
+            "mythic",
+            "epic",
+        },
+        directory = 'rarities/'
+    },
+    spectrals = {
+        list = {
+            "polymerization",
+        },
+        directory = 'consumables/spectrals/'
     },
 }
 
@@ -67,6 +102,22 @@ SMODS.Atlas{
     px = 71,
     py = 95
 }
+
+SMODS.Atlas{
+    key = 'Enhancements',
+    path = 'Enhancements.png',
+    px = 71,
+    py = 95
+}
+
+SMODS.Atlas{
+    key = 'Blinds',
+    path = 'Blinds.png',
+    px = 34,
+    py = 34,
+    atlas_table = 'ANIMATION_ATLAS',
+    frames = 21
+}
 ----------------------------------------------------------------
 ----------------------------------------------------------------
 
@@ -89,11 +140,20 @@ Card.set_ability = function(self, center, initial, delay_sprites)
     original_set_ability(self, center, initial, delay_sprites)
 
     if center and center.name == "j_rob_massive_joker" then
-        print("Resizing Massive Joker in set_ability")
+        -- print("Resizing Massive Joker in set_ability")
         self.T.h = self.T.h * 1.35 
         self.T.w = self.T.w * 1.35 
         --print("New dimensions - Width:", self.T.w, "Height:", self.T.h)
     end
+end
+
+local old_game_init = Game.init_game_object
+Game.init_game_object = function(self)
+  old_ret = old_game_init(self)
+
+  old_ret.green_seal_draws = 0
+
+  return old_ret
 end
 
 ----------------------------------------------------------------

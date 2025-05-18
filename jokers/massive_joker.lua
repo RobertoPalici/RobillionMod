@@ -12,6 +12,7 @@ SMODS.Joker{
     rarity = 3,
     cost = 8,
     atlas = 'Jokers',
+    blueprint_compat = true,
     pos = {x = 2, y = 0 },
     loc_vars = function(self, info_queue, center)
         return {vars = { center.ability.extra.mult,

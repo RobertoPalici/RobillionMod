@@ -12,6 +12,7 @@ SMODS.Joker{
     cost = 5,
     config = {},
     atlas = "Jokers",
+    blueprint_compat = false,
     pos = {x = 1, y = 1},
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.before and not context.blueprint then
