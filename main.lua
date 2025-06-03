@@ -26,6 +26,8 @@ local files = {
             "gojo",
             "six_eyes",
             "unlimited_void",
+            "pure_chaos",
+            "lottery_ticket",
         },
         directory = 'jokers/'
     },
@@ -41,14 +43,14 @@ local files = {
         },
         directory = 'consumables/planets/'
     },
-    vouchers = {
-        list = {
+    -- vouchers = {
+    --     list = {
             
-            "seal_the_deal",
-            "sealionaire",
-        },
-        directory = 'vouchers/'
-    },
+    --         "seal_the_deal",
+    --         "sealionaire",
+    --     },
+    --     directory = 'vouchers/'
+    -- },
     seals = {
         list = {
             "green_seal",
@@ -125,6 +127,7 @@ SMODS.Atlas{
 local original_set_ability = Card.set_ability
 local original_load = Card.load
 
+
 Card.load = function(self, cardTable, other_card)
     original_load(self, cardTable, other_card)
     
@@ -145,7 +148,12 @@ Card.set_ability = function(self, center, initial, delay_sprites)
         self.T.w = self.T.w * 1.35 
         --print("New dimensions - Width:", self.T.w, "Height:", self.T.h)
     end
+
+    if center and center.name == "j_rob_pure_chaos" and G.GAME.entropy then
+        self.ability.extra.Xmult = G.GAME.entropy
+    end
 end
+
 
 local old_game_init = Game.init_game_object
 Game.init_game_object = function(self)

@@ -3,9 +3,8 @@ SMODS.Joker{
     loc_txt = {
         name = 'Six Eyes',
         text = {
-            'If you have both {C:attention}Gojo{} and {C:attention}Hollow Purple{}',
-            'destroy every Joker and create',
-            '{C:attention} Unlimited Void{} when {C:attention}Blind{} is selected',
+            'Gojo needs this ability',
+            'to create {C:dark_edition}Unlimited Void{}',
         }
     },
     rarity = 3,

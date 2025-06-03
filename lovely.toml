@@ -86,3 +86,187 @@ G.GAME.orange_seal = false
 match_indent = true
 times = 1
 
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = '''
+add_round_eval_row({name = 'bottom', dollars = dollars})
+'''
+position = "after"
+payload = '''
+local function get_card_key(card)
+    return tostring(card.base.value) .. "_" .. tostring(card.base.suit)
+end
+local counts = {}
+for _, v in ipairs(G.playing_cards) do
+    local key = get_card_key(v)
+    counts[key] = (counts[key] or 0) + 1
+end
+local total = #G.playing_cards
+G.GAME.entropy = 0
+for _, count in pairs(counts) do
+    local p = count / total
+    G.GAME.entropy = G.GAME.entropy - p * math.log(p) / math.log(2)
+    
+end
+'''
+match_indent = true
+times = 1
+
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = '''
+--Load the settings file
+    local settings = get_compressed('settings.jkr')
+    local settings_ver = nil
+'''
+position = "after"
+payload = '''
+G.GAME.entropy = 0
+'''
+match_indent = true
+times = 1
+
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = '''
+function new_round()
+    G.RESET_JIGGLES = nil
+    delay(0.4)
+'''
+position = "after"
+payload = '''
+local function get_card_key(card)
+    return tostring(card.base.value) .. "_" .. tostring(card.base.suit)
+end
+local counts = {}
+for _, v in ipairs(G.playing_cards) do
+    local key = get_card_key(v)
+    counts[key] = (counts[key] or 0) + 1
+end
+local total = #G.playing_cards
+G.GAME.entropy = 0
+for _, count in pairs(counts) do
+    local p = count / total
+    G.GAME.entropy = G.GAME.entropy - p * math.log(p) / math.log(2)
+    
+end
+'''
+match_indent = true
+times = 1
+
+
+
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = '''
+    if valid_idol_cards[1] then 
+        local idol_card = pseudorandom_element(valid_idol_cards, pseudoseed('idol'..G.GAME.round_resets.ante))
+        G.GAME.current_round.idol_card.rank = idol_card.base.value
+        G.GAME.current_round.idol_card.suit = idol_card.base.suit
+        G.GAME.current_round.idol_card.id = idol_card.base.id
+    end
+end
+'''
+position = "after"
+payload = '''
+function reset_giveaway_card()
+    G.GAME.current_round.giveaway_card.rank = 'Ace'
+    G.GAME.current_round.giveaway_card.suit = 'Spades'
+    local valid_giveaway_cards = {}
+    for k, v in ipairs(G.playing_cards) do
+        if v.ability.effect ~= 'Stone Card' then
+            valid_giveaway_cards[#valid_giveaway_cards+1] = v
+        end
+    end
+    if valid_giveaway_cards[1] then
+        local giveaway_card = pseudorandom_element(valid_giveaway_cards, pseudoseed('giveaway'..G.GAME.round_resets.ante))
+        G.GAME.current_round.giveaway_card.rank = giveaway_card.base.value
+        G.GAME.current_round.giveaway_card.suit = giveaway_card.base.suit
+        G.GAME.current_round.giveaway_card.id = giveaway_card.base.id
+    end
+end
+'''
+match_indent = true
+times = 1
+
+
+
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''
+if not saveTable then
+        G.GAME.current_round.discards_left = G.GAME.round_resets.discards
+        G.GAME.current_round.hands_left = G.GAME.round_resets.hands
+        self.deck:shuffle()
+        self.deck:hard_set_T()
+        reset_idol_card()
+'''
+position = "after"
+payload = '''
+reset_giveaway_card()
+'''
+match_indent = true
+times = 1
+
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = '''
+if G.GAME.round_resets.temp_handsize then G.hand:change_size(-G.GAME.round_resets.temp_handsize); G.GAME.round_resets.temp_handsize = nil end
+if G.GAME.round_resets.temp_reroll_cost then G.GAME.round_resets.temp_reroll_cost = nil; calculate_reroll_cost(true) end
+
+reset_idol_card()
+reset_mail_rank()
+'''
+position = "after"
+payload = '''
+reset_giveaway_card()
+'''
+match_indent = true
+times = 1
+
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+elseif self.ability.name == 'Merry Andy' then loc_vars = {self.ability.d_size, self.ability.h_size}
+elseif self.ability.name == 'The Idol' then loc_vars = {self.ability.extra, localize(G.GAME.current_round.idol_card.rank, 'ranks'), localize(G.GAME.current_round.idol_card.suit, 'suits_plural'), colours = {G.C.SUITS[G.GAME.current_round.idol_card.suit]}}
+'''
+position = "after"
+payload = '''
+elseif self.ability.name == 'j_rob_lottery_ticket' then loc_vars = {self.ability.min_probability, self.ability.max_probability,localize(G.GAME.current_round.giveaway_card.rank, 'ranks'), localize(G.GAME.current_round.giveaway_card.suit, 'suits_plural'), colours = {G.C.SUITS[G.GAME.current_round.giveaway_card.suit]}, self.ability.money, self.ability.probability}
+'''
+match_indent = true
+times = 1
+
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''
+idol_card = {suit = 'Spades', rank = 'Ace'},
+mail_card = {rank = 'Ace'},
+'''
+position = "after"
+payload = '''
+giveaway_card = {suit = 'Spades', rank = 'Ace'},
+'''
+match_indent = true
+times = 1
+
+
+
+
+
+

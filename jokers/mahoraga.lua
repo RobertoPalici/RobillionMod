@@ -23,7 +23,7 @@ SMODS.Joker{
         if context.setting_blind and not context.getting_sliced and not context.blueprint then
             G.E_MANAGER:add_event(Event({
                 func = function()
-                    ease_hands_played(-G.GAME.current_round.hands_left + self.config.hands)
+                    G.GAME.current_round.hands_left = 1
                 return true
                 end
             }))

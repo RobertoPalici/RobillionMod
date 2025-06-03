@@ -12,7 +12,7 @@ SMODS.Joker{
     pos = {x = 0, y = 3 },
     config = {
         extra ={
-            Xmult = 1e30
+            Xmult = 1e308
         }
     },
     loc_vars = function(self, info_queue, center)
