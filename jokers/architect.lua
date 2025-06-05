@@ -5,11 +5,12 @@ SMODS.Joker{
         text = {
             '{C:green}#1# in #2#{} chance',
             'this joker is destroyed', 
-            'and creates a {C:attention}Blueprint{}'
+            'and creates a {C:attention}Blueprint{}',
+            'at the end of the round'
         }
     },
-    rarity = 3,
-    cost = 10,
+    rarity = "rob_epic",
+    cost = 15,
     blueprint_compat = false,
     atlas = 'Jokers',
     pos = {x = 3, y = 0 },

@@ -7,6 +7,7 @@ SMODS.Joker{
             '{C:attention}#3#{} of {V:1}#4#{} you draw',
             'with a probability {C:red}less than{}',
             '{C:blue}or equal{} to {C:attention}15%{}',
+            'after {C:blue}play{} or {C:red}discard{}'
             '{C:inactive}(Currently #1#-#2#%){}'
         }
     },

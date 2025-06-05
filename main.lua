@@ -28,6 +28,7 @@ local files = {
             "unlimited_void",
             "pure_chaos",
             "lottery_ticket",
+            "possible_future_outcomes",
         },
         directory = 'jokers/'
     },

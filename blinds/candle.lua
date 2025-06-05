@@ -4,8 +4,8 @@ SMODS.Blind{
     loc_txt = {
         name = "Candle",
         text = {
-            "First card in each scoring hand",
-            "is destroyed",
+            "First card in each played",
+            "hand is destroyed",
         }
     },
     atlas = "Blinds",
@@ -20,18 +20,9 @@ SMODS.Blind{
                 trigger = 'after',
                 delay = 0.5,
                 func = function()
-                    local _, _, _, scoring_hand = G.FUNCS.get_poker_hand_info(G.play.cards)
-                    if scoring_hand and #scoring_hand > 0 and #G.play.cards > 1 then
+                    if #G.play.cards > 1 then
 
-                        local first_card = scoring_hand[1]
-                        local destroyed_card = nil
-        
-                        for i = 1, #G.play.cards do
-                            if G.play.cards[i] == first_card then
-                                destroyed_card = G.play.cards[i]
-                                break
-                            end
-                        end
+                        local destroyed_card = G.play.cards[1]
 
                         play_sound('tarot1')
                         G.deck:remove_card(destroyed_card)
