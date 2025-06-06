@@ -9,8 +9,9 @@ SMODS.Joker{
             'at the end of the round'
         }
     },
-    rarity = "rob_epic",
-    cost = 15,
+    rarity = 3,
+    cost = 9,
+    discovered = true,
     blueprint_compat = false,
     atlas = 'Jokers',
     pos = {x = 3, y = 0 },

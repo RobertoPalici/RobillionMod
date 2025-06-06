@@ -10,7 +10,8 @@ SMODS.Joker{
         }
     },
     rarity = 2,
-    cost = 7,
+    cost = 8,
+    discovered = true,
     atlas = 'Jokers',
     pos = {x = 0, y = 0 },
     config = {

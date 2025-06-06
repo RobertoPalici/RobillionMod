@@ -10,6 +10,7 @@ SMODS.Joker{
     },
     rarity = "rob_epic",
     cost = 10,
+    discovered = true,
     atlas = 'Jokers',
     pos = {x = 1, y = 2 },
     yes_pool_flag = "gojo_hollow_purple",

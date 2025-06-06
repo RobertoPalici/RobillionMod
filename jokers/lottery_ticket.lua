@@ -7,12 +7,14 @@ SMODS.Joker{
             '{C:attention}#3#{} of {V:1}#4#{} you draw',
             'with a probability {C:red}less than{}',
             '{C:blue}or equal{} to {C:attention}15%{}',
-            'after {C:blue}play{} or {C:red}discard{}'
+            'after {C:blue}play{} or {C:red}discard{}',
+            '{s:0.8}Card changes every round',
             '{C:inactive}(Currently #1#-#2#%){}'
         }
     },
     rarity = 1,
-    cost = 4,
+    cost = 5,
+    discovered = true,
     blueprint_compat = false,
     atlas = 'Jokers',
     pos = {x = 4, y = 0},

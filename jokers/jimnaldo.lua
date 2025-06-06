@@ -11,6 +11,7 @@ SMODS.Joker{
     },
     rarity = 2,
     cost = 6,
+    discovered = true,
     blueprint_compat = true,
     atlas = "Jokers",
     pos = {x = 2, y = 1},

@@ -9,6 +9,8 @@ SMODS.Joker{
             'your played hand {C:attention}type{}',
         }
     },
+    rarity = "rob_epic",
+    cost = 10,
     atlas = 'Jokers',
     pos = {x = 2, y = 2 },
     soul_pos = {x = 3, y = 2 },
