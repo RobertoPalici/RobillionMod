@@ -29,6 +29,8 @@ local files = {
             "pure_chaos",
             "lottery_ticket",
             "possible_future_outcomes",
+            "gold_digger",
+            "miner",
         },
         directory = 'jokers/'
     },

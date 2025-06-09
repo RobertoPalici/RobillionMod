@@ -56,7 +56,7 @@ SMODS.Joker{
             return drawn
         end
 
-        -- Salvăm mâna înainte de discard
+
         if context.pre_discard then
             self._initial_hand_keys = {}
             for _, c in ipairs(G.hand.cards) do
@@ -65,7 +65,32 @@ SMODS.Joker{
             -- print("Saved initial hand keys:", table.concat(self._initial_hand_keys, ", "))
         end
 
+        if context.before then
+            self._initial_hand_keys = nil
+        end
+
         if context.hand_drawn then
+
+            local final_hand_keys = {}
+            for _, c in ipairs(G.hand.cards) do
+                table.insert(final_hand_keys, get_unique_card_key(c))
+            end
+
+            local give_money = false
+            if self._initial_hand_keys then
+                local drawn = get_new_drawn_cards(self._initial_hand_keys or {}, final_hand_keys)
+                for _, k in ipairs(drawn) do
+                    local drawn_card = remove_last_segment(k)
+                    -- print("Drawn card:", drawn_card)
+                    -- print("Target card:", key_target)
+                    -- print("Probability:", card.ability.probability)
+                    if drawn_card == key_target and card.ability.probability and card.ability.probability <= 15 then
+                        give_money = true
+                        break
+                    end
+                end
+            end
+
 
             local deck = G.deck.cards
             local N = #deck
@@ -89,40 +114,20 @@ SMODS.Joker{
                 end
             end
 
-            if matching == 0 then
-                card.ability.probability = 0
-             end
-            if 5 >= N then
-                card.ability.probability = 100
-            end
-
             local p_zero_hits = combination(N - matching, 5) / combination(N, 5)
             local p_at_least_one = 1 - p_zero_hits
             card.ability.max_probability = p_at_least_one *100
-            print("Probabilitatea de a trage cel puțin una (în procente):", card.ability.probability)
             local p_zero_hits = combination(N - matching, 1) / combination(N, 1)
             local p_at_least_one = 1 - p_zero_hits
             card.ability.min_probability = p_at_least_one * 100
-            
 
-
-            local final_hand_keys = {}
-            for _, c in ipairs(G.hand.cards) do
-                table.insert(final_hand_keys, get_unique_card_key(c))
+            if give_money then
+                return{
+                    message = 'Jackpot!',
+                    dollars = card.ability.money,
+                    colour = G.C.MONEY,
+                }
             end
-
-            local drawn = get_new_drawn_cards(self._initial_hand_keys or {}, final_hand_keys)
-            for _, k in ipairs(drawn) do
-                local drawn_card = remove_last_segment(k)
-                if drawn_card == key_target and card.probability and card.ability.probability <= 15 then
-                    return{
-                        message = 'Jackpot!',
-                        dollars = card.ability.money,
-                        colour = G.C.MONEY,
-                    }
-                end
-            end
-
             
         end
 
@@ -162,6 +167,7 @@ SMODS.Joker{
             local p_zero_hits = combination(N - matching, x) / combination(N, x)
             local p_at_least_one = 1 - p_zero_hits
             card.ability.probability = p_at_least_one * 100
+            -- print("Probabilitatea skibidi:", card.ability.probability)
         end
     end
 }

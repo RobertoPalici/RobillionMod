@@ -79,7 +79,7 @@ SMODS.Joker{
             if context.other_card:get_id() == 7 and card.ability.extra > 1 then
                 return{
                     x_mult = card.ability.extra,
-                    color = G.C.RED
+                    color = G.C.MULT
                 }
             end
         end
