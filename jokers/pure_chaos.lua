@@ -15,7 +15,7 @@ SMODS.Joker{
     blueprint = true,
     blueprint_compat = false,
     atlas = 'Jokers',
-    pos = {x = 3, y = 0 },
+    pos = {x = 0, y = 4},
     config = {
         extra = {
             Xmult = 1

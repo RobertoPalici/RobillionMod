@@ -31,6 +31,7 @@ local files = {
             "possible_future_outcomes",
             "gold_digger",
             "miner",
+            "class_divide"
         },
         directory = 'jokers/'
     },

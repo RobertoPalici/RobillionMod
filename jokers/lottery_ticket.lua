@@ -17,7 +17,7 @@ SMODS.Joker{
     discovered = true,
     blueprint_compat = false,
     atlas = 'Jokers',
-    pos = {x = 4, y = 0},
+    pos = {x = 2, y = 3},
     config = {
         probability = nil,
         min_probability = 0,

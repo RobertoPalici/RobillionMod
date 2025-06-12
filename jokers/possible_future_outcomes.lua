@@ -13,7 +13,7 @@ SMODS.Joker{
     cost = 10,
     atlas = 'Jokers',
     pos = {x = 2, y = 2 },
-    soul_pos = {x = 3, y = 2 },
+    soul_pos = {x = 4, y = 3},
     config ={
         extra = 0
     },
@@ -37,7 +37,7 @@ SMODS.Joker{
             local function build_histogram(deck)
                 local value_counts, suit_counts = {}, {}
                 for _, card in ipairs(deck) do
-                    local val, suit = card.base.value, card.base.suit
+                    local val, suit = card.base.id, card.base.suit
                     value_counts[val] = (value_counts[val] or 0) + 1
                     suit_counts[suit] = (suit_counts[suit] or 0) + 1
                 end
@@ -110,10 +110,11 @@ SMODS.Joker{
                 end
         
             elseif hand_type == "Straight" then
+                print("ai jucat straight")
                 local straights = {
-                    {1,2,3,4,5}, {2,3,4,5,6}, {3,4,5,6,7}, {4,5,6,7,8},
+                    {14,2,3,4,5}, {2,3,4,5,6}, {3,4,5,6,7}, {4,5,6,7,8},
                     {5,6,7,8,9}, {6,7,8,9,10}, {7,8,9,10,11}, {8,9,10,11,12},
-                    {9,10,11,12,13}, {10,11,12,13,1}
+                    {9,10,11,12,13}, {10,11,12,13,14}
                 }
                 for _, straight in ipairs(straights) do
                     local possible, ways = true, 1
@@ -131,9 +132,9 @@ SMODS.Joker{
         
             elseif hand_type == "Straight Flush" then
                 local straights = {
-                    {1,2,3,4,5}, {2,3,4,5,6}, {3,4,5,6,7}, {4,5,6,7,8},
+                    {14,2,3,4,5}, {2,3,4,5,6}, {3,4,5,6,7}, {4,5,6,7,8},
                     {5,6,7,8,9}, {6,7,8,9,10}, {7,8,9,10,11}, {8,9,10,11,12},
-                    {9,10,11,12,13}, {10,11,12,13,1}
+                    {9,10,11,12,13}, {10,11,12,13,14}
                 }
                 for suit in pairs(suit_counts) do
                     local suited_counts = {}

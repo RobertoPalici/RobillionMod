@@ -10,7 +10,7 @@ SMODS.Joker{
     cost = 5,
     discovered = true,
     atlas = 'Jokers',
-    pos = {x = 1, y = 0},
+    pos = {x = 3, y = 3},
     calculate = function(self, card, context)
         self.sum = 0
         if context.after then
