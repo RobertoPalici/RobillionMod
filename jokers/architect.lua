@@ -24,8 +24,8 @@ SMODS.Joker{
     end,
     calculate = function(self, card, context)
         if context.end_of_round and not context.blueprint then
-            if context.cardarea == G.jokers then 
-                if pseudorandom('architect') < G.GAME.probabilities.normal/card.ability.extra
+      if context.cardarea == G.jokers then 
+                if pseudorandom('architect') <       G.GAME.probabilities.normal/card.ability.extra
                 and not card.ability.is_destroyed then
                 card.ability.is_destroyed = true
                 G.E_MANAGER:add_event(Event({

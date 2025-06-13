@@ -3,7 +3,12 @@ SMODS.Joker{
     loc_txt = {
         name = 'Miner',
         text = {
-            'placeholder',
+            'Destroys a {C:attention}Stone Card{}',
+            'from your deck at',
+            'the end of the round',
+            'and gives {C:money}$3{} or a',
+            '{C:green}1 in 10{} chance',
+            'to win {C:money}$25{}',
         }
     },
     rarity = 1,
@@ -12,45 +17,38 @@ SMODS.Joker{
     atlas = 'Jokers',
     pos = {x = 3, y = 3},
     calculate = function(self, card, context)
-        self.sum = 0
-        if context.after then
-            print("Miner card used in after context")
-            for _, v in ipairs(G.play.cards) do
-                if v.ability and v.ability.name == "Stone Card" then
+        if context.end_of_round and context.cardarea == G.jokers then
+            print("Miner Joker activated")
+            for _, card in ipairs(G.playing_cards) do
+                if card.ability.name == "Stone Card" then
+                    print("Found Stone Card")
                     G.E_MANAGER:add_event(Event({
-                        trigger = 'after', delay = 1, blockable = true,
+                        trigger = 'after',
+                        delay = 0.3,
+                        blockable = false,
                         func = function()
-                            v:start_dissolve({G.C.MONEY}, nil, 1.6)
-                            G.deck:remove_card(v)
-                            return true
+                           card:remove()
+                           return true
                         end
                     }))
-
                     local money = 0
-                    local r = math.random(1, 15)
-                    
-                    if r <= 10 then
-                        money = 5     
-                    elseif r <= 14 then
-                        money = 10     
+                    result = math.random(1, 10)
+                    if result == 10 then
+                        money = 25
                     else
-                        money = 25    
+                        money = 3
                     end
-    
+
                     if money > 0 then
-                        self.sum = self.sum + money
+                        ease_dollars(money)
+                        return{
+                            message = "$".. money,
+                            colour = G.C.MONEY,
+                            delay = 0.45
+                        }
                     end
                 end
             end
-
-            if self.sum > 0 then
-                return{
-
-                    dollars = self.sum,
-                    message = "+ $" .. tostring(self.sum),
-                    color = G.C.MONEY,
-                }
-            end    
         end
     end,
 }
