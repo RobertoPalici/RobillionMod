@@ -3,7 +3,11 @@ SMODS.Joker{
     loc_txt = {
         name = 'Class Divide',
         text = {
-            'placeholder'
+            "Gives {C:chips}+#2#{} Chips if you have",
+            "{C:money}$10{} or less when hand is played,",
+            "{C:mult}+#3#{} Mult if you have between",
+            "{C:money}$15{} and {C:money}$25{} or {X:mult,C:white}X#1#{} and {C:money}$#4#{}",
+            "if you have more than {C:money}$25{}",
         }
     },
     rarity = 2,
@@ -21,7 +25,7 @@ SMODS.Joker{
         }
     },
     loc_vars = function(self, info_queue, center)
-        return {vars = {center.ability.extra.Xmult, center.ability.extra.chips, center.ability.extra.mult}}
+        return {vars = {center.ability.extra.Xmult, center.ability.extra.chips, center.ability.extra.mult, center.ability.extra.money}}
     end,
     calculate = function(self, card, context)
         if context.joker_main then

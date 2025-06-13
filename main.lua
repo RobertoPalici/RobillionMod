@@ -31,7 +31,8 @@ local files = {
             "possible_future_outcomes",
             "gold_digger",
             "miner",
-            "class_divide"
+            "class_divide",
+            "magnetic_field"
         },
         directory = 'jokers/'
     },

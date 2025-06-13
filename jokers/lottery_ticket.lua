@@ -7,7 +7,7 @@ SMODS.Joker{
             '{C:attention}#3#{} of {V:1}#4#{} you draw',
             'with a probability {C:red}less than{}',
             '{C:blue}or equal{} to {C:attention}15%{}',
-            'after {C:blue}play{} or {C:red}discard{}',
+            'after {C:red}discard{}',
             '{s:0.8}Card changes every round',
             '{C:inactive}(Currently #1#-#2#%){}'
         }
@@ -22,7 +22,7 @@ SMODS.Joker{
         probability = nil,
         min_probability = 0,
         max_probability= 100,
-        money = 25,
+        money = 50,
     },
     calculate = function(self, card, context)
         local function get_card_key(card)

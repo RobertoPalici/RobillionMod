@@ -3,8 +3,7 @@ SMODS.Joker{
     loc_txt ={
         name = 'Gold Digger',
         text = {
-            'Played {C:attention}Kings{} and',
-            '{C:attention}Jacks{} each give',
+            'Played {C:attention}Jacks{} each give',
             '{X:mult,C:white}X#1#{} Mult when scored',
             'if the hand is played',
             'with {C:money}$#2#{} or more'
