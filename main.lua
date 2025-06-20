@@ -12,7 +12,7 @@ local files = {
     jokers = {
         list = {
             "seven_ate_nine",
-            "jack_black",
+            "blackjack",
             "massive_joker",
             "architect",
             "earfquake",
@@ -32,7 +32,8 @@ local files = {
             "gold_digger",
             "miner",
             "class_divide",
-            "magnetic_field"
+            "magnetic_field",
+            "break_if_emergency"
         },
         directory = 'jokers/'
     },
@@ -125,6 +126,11 @@ SMODS.Atlas{
     atlas_table = 'ANIMATION_ATLAS',
     frames = 21
 }
+
+SMODS.Sound{
+    key = 'alarm',
+    path = 'alarm.ogg',
+}
 ----------------------------------------------------------------
 ----------------------------------------------------------------
 
@@ -167,6 +173,58 @@ Game.init_game_object = function(self)
   old_ret.green_seal_draws = 0
 
   return old_ret
+end
+
+local original_calculate_destroying = SMODS.calculate_destroying_cards
+
+SMODS.calculate_destroying_cards = function(context, cards_destroyed, scoring_hand)
+    for i,card in ipairs(context.cardarea.cards) do
+        local destroyed = nil
+        --un-highlight all cards
+        local in_scoring = scoring_hand and SMODS.in_scoring(card, context.scoring_hand)
+        if scoring_hand and in_scoring then 
+            -- Use index of card in scoring hand to determine pitch
+            local m = 1
+            for j, _card in pairs(scoring_hand) do
+                if card == _card then m = j break end
+            end
+            highlight_card(card,(m-0.999)/(#scoring_hand-0.998),'down')
+        end
+
+        local emergency = nil
+        for _, v in ipairs(G.jokers.cards) do
+            if v.config and v.config.center and v.config.center.key == 'j_rob_break_if_emergency' then
+                emergency = true
+                break
+            end
+        end
+        
+
+        -- context.destroying_card calculations
+        context.destroy_card = card
+        context.destroying_card = nil
+        if scoring_hand then
+            if in_scoring then
+                context.cardarea = G.play
+                context.destroying_card = card
+            else
+                context.cardarea = 'unscored'
+            end
+        end
+        local flags = SMODS.calculate_context(context)
+        if flags.remove or emergency and G.GAME.current_round.hands_left == 0 and in_scoring then destroyed = true end
+
+        -- TARGET: card destroyed
+
+        if destroyed then
+            if SMODS.shatters(card) then
+                card.shattered = true
+            else
+                card.destroyed = flags.remove
+            end
+            cards_destroyed[#cards_destroyed+1] = card
+        end
+    end
 end
 
 ----------------------------------------------------------------

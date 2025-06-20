@@ -11,99 +11,108 @@ SMODS.Consumable{
 
     },
     config ={
-        compat = {
-            gojo = false,
-            hollow_purple = false,
-            six_eyes = false,
-        },
-        is_juiced = false,
+        can_fuse = false,
+        fusion = nil,
     },
-    loc_vars = function(self, info_queue, center)
-        return {vars = {center.ability.compat.gojo,
-                        center.ability.compat.hollow_purple
-                        }
-                }
-    end,
     atlas = "Consumables",
     pos = {x = 1, y = 0},
     cost = 5,
-    can_use = function(self,card,area)
-        card.ability.compat.gojo = false
-        card.ability.compat.hollow_purple = false
-        card.ability.compat.six_eyes = false
-        for _, v in ipairs(G.jokers.cards) do
-            if v.config and v.config.center and v.config.center.key == 'j_rob_gojo' then
-                card.ability.compat.gojo = true
-            elseif v.config and v.config.center and v.config.center.key == 'j_rob_hollow_purple' then
-                card.ability.compat.hollow_purple = true
-            elseif v.config and v.config.center and v.config.center.key == 'j_rob_six_eyes' then
-                card.ability.compat.six_eyes = true
-            end   
+    can_use = function(self, card, area)
+        card.ability.can_fuse = false
+        
+        local j1 = G.jokers.cards[1]
+        local j2 = G.jokers.cards[2]
+
+        if j1 and j2 then
+            local key1 = j1.config.center.key
+            local key2 = j2.config.center.key
+
+            if (key1 == 'j_rob_gojo' and key2 == 'j_rob_six_eyes') or
+            (key1 == 'j_rob_six_eyes' and key2 == 'j_rob_gojo') then
+                card.ability.can_fuse = true
+                card.ability.fusion = 'j_rob_unlimited_void'
+            end
         end
-        if card.ability.compat.gojo and card.ability.compat.hollow_purple and card.ability.compat.six_eyes then
-            return true
-        else
-            return false
-        end
+        return card.ability.can_fuse
     end,
-    calculate = function(self, card, context)
-        if self:can_use(card) and not card.ability.is_juiced then
-            card.ability.is_juiced = true
-            local eval = function() return card.ability.compat.gojo and card.ability.compat.hollow_purple and card.ability.compat.six_eyes  end
-            juice_card_until(card, eval, true)
-        elseif not self:can_use(card) then
-            card.ability.is_juiced = false 
-        end
-    end,
+
     use = function(self, card, area, copier)
-        local gojo = nil
-        local hollow_purple = nil
-        local six_eyes = nil
-        for _, v in ipairs(G.jokers.cards) do
-            if v.config and v.config.center and v.config.center.key == 'j_rob_gojo' then
-                gojo = v
-            elseif v.config and v.config.center and v.config.center.key == 'j_rob_hollow_purple' then
-                hollow_purple = v
-            elseif v.config and v.config.center and v.config.center.key == 'j_rob_six_eyes' then
-                six_eyes = v
-            end   
-        end
-
-        gojo.getting_sliced = true
-        hollow_purple.getting_sliced = true
-        six_eyes.getting_sliced = true
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                G.jokers.cards[1]:start_dissolve({G.C.RED}, nil, 1.6)
+                return true
+            end
+        }))
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after', delay = 2, blockable = true,
+            func = function()
+                G.jokers.cards[1]:start_dissolve({G.C.RED}, nil, 1.6)
+                return true
+            end
+        }))
 
         G.E_MANAGER:add_event(Event({
-            func = function()
-                gojo:start_dissolve({G.C.RED}, nil, 1.6)
-                return true
-            end
-        }))
-        G.E_MANAGER:add_event(Event({
             trigger = 'after', delay = 2, blockable = true,
             func = function()
-                hollow_purple:start_dissolve({G.C.RED}, nil, 1.6)
-                return true
-            end
-        }))
-        G.E_MANAGER:add_event(Event({
-            trigger = 'after', delay = 2, blockable = true,
-            func = function()
-                six_eyes:start_dissolve({G.C.RED}, nil, 1.6)
-                return true
-            end
-        }))
-        G.E_MANAGER:add_event(Event({
-            trigger = 'after', delay = 2, blockable = true,
-            func = function()
-                local new_unlimited_void = create_card('Joker', G.jokers, nil,nil,nil,nil, 'j_rob_unlimited_void')
-                new_unlimited_void:add_to_deck()
-                G.jokers:emplace(new_unlimited_void)
+                local fusion = create_card('Joker', G.jokers, nil,nil,nil,nil, card.ability.fusion)
+                fusion:add_to_deck()
+                G.jokers:emplace(fusion)
                 return true
             end
 
         }))
     end
-        
-
 }   
+
+
+
+        -- local gojo = nil
+        -- local hollow_purple = nil
+        -- local six_eyes = nil
+        -- for _, v in ipairs(G.jokers.cards) do
+        --     if v.config and v.config.center and v.config.center.key == 'j_rob_gojo' then
+        --         gojo = v
+        --     elseif v.config and v.config.center and v.config.center.key == 'j_rob_hollow_purple' then
+        --         hollow_purple = v
+        --     elseif v.config and v.config.center and v.config.center.key == 'j_rob_six_eyes' then
+        --         six_eyes = v
+        --     end   
+        -- end
+
+        -- gojo.getting_sliced = true
+        -- hollow_purple.getting_sliced = true
+        -- six_eyes.getting_sliced = true
+
+        -- G.E_MANAGER:add_event(Event({
+        --     func = function()
+        --         gojo:start_dissolve({G.C.RED}, nil, 1.6)
+        --         return true
+        --     end
+        -- }))
+        -- G.E_MANAGER:add_event(Event({
+        --     trigger = 'after', delay = 2, blockable = true,
+        --     func = function()
+        --         hollow_purple:start_dissolve({G.C.RED}, nil, 1.6)
+        --         return true
+        --     end
+        -- }))
+        -- G.E_MANAGER:add_event(Event({
+        --     trigger = 'after', delay = 2, blockable = true,
+        --     func = function()
+        --         six_eyes:start_dissolve({G.C.RED}, nil, 1.6)
+        --         return true
+        --     end
+        -- }))
+        -- G.E_MANAGER:add_event(Event({
+        --     trigger = 'after', delay = 2, blockable = true,
+        --     func = function()
+        --         local new_unlimited_void = create_card('Joker', G.jokers, nil,nil,nil,nil, 'j_rob_unlimited_void')
+        --         new_unlimited_void:add_to_deck()
+        --         G.jokers:emplace(new_unlimited_void)
+        --         return true
+        --     end
+
+        -- }))
+
+
+        -- if G.jokers.cards[1].config.center.key == 'j_rob_gojo' and G.jokers.cards[2].config.center.key == 'j_rob_six_eyes' or G.jokers.cards[2].config.center.key == 'j_rob_gojo' and G.jokers.cards[1].config.center.key == 'j_rob_six_eyes' then

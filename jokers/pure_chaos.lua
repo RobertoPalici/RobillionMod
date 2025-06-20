@@ -34,9 +34,9 @@ SMODS.Joker{
             }
         end
         if context.setting_blind then
-            print('End of round test joker')
+            -- print('End of round test joker')
             card.ability.extra.Xmult = G.GAME.entropy
-            print('Xmult: ',  card.ability.extra.Xmult)
+            -- print('Xmult: ',  card.ability.extra.Xmult)
             return{
                 message = "Entropy!"
             }

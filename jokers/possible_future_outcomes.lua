@@ -21,7 +21,6 @@ SMODS.Joker{
         return {vars = {center.ability.extra}}
     end,
     calculate = function(self, card, context)
-        -- Returnează numărul de combinații posibile din deck care pot forma o mână de tipul specificat
         function count_possible_hands(deck, hand_type)
             local function factorial(n)
                 local r = 1

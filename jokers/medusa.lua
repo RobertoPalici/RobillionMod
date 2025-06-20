@@ -3,7 +3,7 @@ SMODS.Joker{
     loc_txt = {
         name = "Medusa",
         text = {
-            "All played {C:attention}face{} cards",
+            "All scoring {C:attention}face{} cards",
             "become {C:attention}Stone{} cards with a",
             "random {C:attention}edition{} when scored",
         }
@@ -23,6 +23,7 @@ SMODS.Joker{
                         faces[#faces+1] = v
                         v:set_ability(G.P_CENTERS.m_stone, nil, true)
                         G.E_MANAGER:add_event(Event({
+                                blockable = true,
                                 delay = 2,
                                 func = function()
                                 local edition = poll_edition('aura', nil, true, true)
