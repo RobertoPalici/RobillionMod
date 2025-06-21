@@ -109,7 +109,6 @@ SMODS.Joker{
                 end
         
             elseif hand_type == "Straight" then
-                print("ai jucat straight")
                 local straights = {
                     {14,2,3,4,5}, {2,3,4,5,6}, {3,4,5,6,7}, {4,5,6,7,8},
                     {5,6,7,8,9}, {6,7,8,9,10}, {7,8,9,10,11}, {8,9,10,11,12},

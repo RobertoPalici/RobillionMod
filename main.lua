@@ -33,7 +33,13 @@ local files = {
             "miner",
             "class_divide",
             "magnetic_field",
-            "break_if_emergency"
+            "break_if_emergency",
+            "kings_jester",
+            "photochad",
+            "boss_raider",
+            "cloaked_colossus",
+            "prime_bottle",
+            "golem_cycle"
         },
         directory = 'jokers/'
     },

@@ -21,7 +21,6 @@ SMODS.Joker{
             local blue = nils
             for _, v in ipairs(G.jokers.cards) do
                 if v.config and v.config.center and v.config.center.key == 'j_rob_reversal_red' then
-                    print("Success")
                     red = v
                 elseif v.config and v.config.center and v.config.center.key == 'j_rob_lapse_blue' then
                     blue = v

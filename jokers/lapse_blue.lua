@@ -6,7 +6,7 @@ SMODS.Joker{
             '{C:chips}+#1#{} Chips',
         }
     },
-    rarity = 2,
+    rarity = 1,
     cost = 6,
     discovered = true,
     atlas = 'Jokers',

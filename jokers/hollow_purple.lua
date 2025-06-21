@@ -13,7 +13,7 @@ SMODS.Joker{
     discovered = true,
     atlas = 'Jokers',
     pos = {x = 1, y = 2 },
-    yes_pool_flag = "gojo_hollow_purple",
+    yes_pool_flag = "gojo__purple",
     config = {
         extra = {
             chips = 600,

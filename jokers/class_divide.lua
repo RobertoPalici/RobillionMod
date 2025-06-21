@@ -3,10 +3,10 @@ SMODS.Joker{
     loc_txt = {
         name = 'Class Divide',
         text = {
-            "Gives {X:mult,C:white}X#1#{} and {C:money}$#3#{}",
-            "for every hand played with",
-            "{C:money}$25{} or more",
-            "{C:blue}+#2#{} otherwise",
+            "Gives {X:mult,C:white}X#1#{} and {C:money}$#3#{} or",
+            "{C:blue}+#2#{} and lose {C:money}$1{} otherwise",
+            "for every hand played",
+            "with {C:money}$25{} or more",
         }
     },
     rarity = 2,
@@ -31,6 +31,7 @@ SMODS.Joker{
                 return{
                     message = 'Poor!',
                     chips = card.ability.extra.chips,
+                    dollars = -1,
                     color = G.C.CHIPS
                 }
             else
