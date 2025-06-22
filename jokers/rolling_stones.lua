@@ -3,9 +3,9 @@ SMODS.Joker{
     loc_txt = {
         name = "Rolling Stones",
         text = {
-            "Played {C:attention}Stone{} cards",
-            "each give {X:chips,C:white} X#1# {} Chips",
-            "when scored"
+            "Each consecutive {C:attention}Stone{} card trigger",
+            'trigger gives + {X:chips,C:white}X0.1{} Chips',
+            'starting at {X:chips,C:white}X1.5{} Chips'
         }
 
     },
@@ -16,19 +16,26 @@ SMODS.Joker{
     atlas = 'Jokers',
     pos = { x = 0, y = 1},
     config = {
-        extra = 1.5
+        extra = 1,
+        bonus = 0
     },
     loc_vars = function(self, info_queue, center)
         return {vars = {center.ability.extra}}
     end,
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play then
-            if context.other_card.ability.name == "Stone Card" then
+            if context.other_card.ability.name == "Stone Card" then 
+                card.ability.bonus = card.ability.bonus + 0.1
                 return{
-                    x_chips = card.ability.extra,
-                    colour = G.C.BLUE,
+                    x_chips = card.ability.extra + card.ability.bonus,
+                    colour = G.C.BLUE
                 }
+            else
+                card.ability.bonus = 0
             end
+        end
+        if context.after then
+            card.ability.bonus = 0
         end
     end
 

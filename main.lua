@@ -39,7 +39,8 @@ local files = {
             "boss_raider",
             "cloaked_colossus",
             "prime_bottle",
-            "golem_cycle"
+            "golem_cycle",
+            "iss"
         },
         directory = 'jokers/'
     },

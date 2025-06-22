@@ -3,8 +3,8 @@ SMODS.Joker{
     loc_txt = {
         name = "Earfquake",
         text = {
-            "Retrigger each played {C:attention}Stone{} card",
-            "{C:attention}2{} additional times if played hand",
+            "Retrigger each played {C:attention}Stone{}",
+            "card {C:attention}1{} time if played hand",
             "contains {C:attention}5 Stone cards{}",
         }
     },

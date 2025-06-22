@@ -51,6 +51,11 @@ SMODS.Consumable{
             (key1 == 'j_rob_lottery_ticket' and key2 == 'j_rob_pure_chaos') then
                 card.ability.can_fuse = true
                 card.ability.fusion = 'j_rob_possible_future_outcomes'
+            
+            elseif (key1 == 'j_space' and key2 == 'j_satellite') or
+            (key1 == 'j_satellite' and key2 == 'j_space') then
+                card.ability.can_fuse = true
+                card.ability.fusion = 'j_rob_iss'
             end
         end
         return card.ability.can_fuse

@@ -23,7 +23,6 @@ SMODS.Joker{
                    curr.ability.name == "Steel Card" and curr.ability.h_x_mult and prev.ability.h_x_mult then
                    curr.ability.h_x_mult = prev.ability.h_x_mult + bonus
                 end
-                print(G.hand.cards[i].base.value, G.hand.cards[i].base.suit, "Inainte")
             end
         end
         if context.after then

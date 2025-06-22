@@ -1,10 +1,10 @@
 SMODS.PokerHand{
     key = 'stone_flush',
-    mult = 10,
-    chips = 50,
+    mult = 100,
+    chips = 10,
     l_mult = 5,
     l_chips = 10,
-    l_chips_base = 50,
+    l_chips_base = 10,
     l_chips_scaling = 5,
     visible = false,
     example = {
