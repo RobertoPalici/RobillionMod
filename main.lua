@@ -219,7 +219,7 @@ SMODS.calculate_destroying_cards = function(context, cards_destroyed, scoring_ha
             end
         end
         local flags = SMODS.calculate_context(context)
-        if flags.remove or emergency and G.GAME.current_round.hands_left == 0 and in_scoring then destroyed = true end
+        if flags and flags.remove or emergency and G.GAME.current_round.hands_left == 0 and in_scoring then destroyed = true end
 
         -- TARGET: card destroyed
 
