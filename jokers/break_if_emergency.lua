@@ -12,7 +12,7 @@ SMODS.Joker{
     rarity = 2,
     cost = 6,
     atlas = 'Jokers',
-    pos = {x = 3, y = 2 },
+    pos = {x = 0, y = 5 },
     calculate = function(self, card, context)
         if context.before and G.GAME.current_round.hands_left == 0 then
             for k, v in ipairs(context.scoring_hand) do

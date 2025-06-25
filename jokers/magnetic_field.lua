@@ -12,7 +12,7 @@ SMODS.Joker{
     cost = 8,
     discovered = true,
     atlas = 'Jokers',
-    pos = {x = 0, y = 0},
+    pos = {x = 4, y = 5},
     calculate = function(self, card, context)
         if context.before then
             local bonus = 0.25

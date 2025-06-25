@@ -12,7 +12,7 @@ SMODS.Joker{
     cost = 10,
     discovered = true,
     atlas = 'Jokers',
-    pos = {x = 0, y = 3},
+    pos = {x = 0, y = 6},
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play then
             if context.other_card:get_id() == 2 or

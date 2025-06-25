@@ -13,7 +13,7 @@ SMODS.Joker{
     cost = 10,
     discovered = true,
     atlas = 'Jokers',
-    pos = {x = 2, y = 1 },
+    pos = {x = 1, y = 4 },
     config = {
         extra = {
             retrigger = 2,

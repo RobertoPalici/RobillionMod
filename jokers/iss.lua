@@ -11,7 +11,7 @@ SMODS.Joker{
     rarity = "rob_epic",
     cost = 10,
     atlas = 'Jokers',
-    pos = {x = 3, y = 2},
+    pos = {x = 2, y = 5},
     blueprint_compat = true,
     calculate = function(self, card, context)
         if context.before and not context.hook then

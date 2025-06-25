@@ -13,7 +13,7 @@ SMODS.Joker{
     rarity = 'rob_epic',
     cost = 10,
     atlas = 'Jokers',
-    pos = {x = 1, y = 2},
+    pos = {x = 4, y = 4},
     config = {
         money = 0,
         x_chips = 2
