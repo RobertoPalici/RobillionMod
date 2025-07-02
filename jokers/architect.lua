@@ -16,7 +16,7 @@ SMODS.Joker{
     atlas = 'Jokers',
     pos = {x = 3, y = 0 },
     config = {
-        extra = 6,
+        extra = 3,
         is_destroyed = false
     },
     loc_vars = function(self, info_queue, center)

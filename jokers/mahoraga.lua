@@ -14,7 +14,7 @@ SMODS.Joker{
     blueprint_compat = true,
     pos = {x = 3, y = 1},
     config = {
-        Xmult = 10,
+        Xmult = 5,
         hands = 1,
     },
     loc_vars = function(card, info_queue, center)
